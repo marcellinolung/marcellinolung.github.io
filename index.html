@@ -241,22 +241,23 @@
   .case{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
   .case.open{display:flex}
   .case-backdrop{position:absolute;inset:0;background:rgba(20,20,20,.38);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  .case-panel{position:relative;width:min(1080px,100%);height:min(700px,100%);background:var(--surface);border-radius:28px;display:grid;grid-template-columns:1.05fr 1fr;overflow:hidden;box-shadow:0 50px 100px -30px rgba(40,20,5,.45);transform-origin:0 0}
+  .case-panel{position:relative;width:min(940px,100%);height:min(580px,calc(100vh - 64px));background:var(--surface);border-radius:28px;display:grid;grid-template-columns:.9fr 1fr;overflow:hidden;box-shadow:0 50px 100px -30px rgba(40,20,5,.45);transform-origin:0 0}
   .case-media{padding:14px;display:flex}
   .case-media .thumb{flex:1;border-radius:18px}
-  .case-body{padding:40px 44px 28px;overflow-y:auto;display:flex;flex-direction:column}
-  .case-body h3{font-size:clamp(30px,3vw,42px);line-height:1.05;letter-spacing:-.035em;margin-top:14px}
-  .case-body .lead{font-size:18px;line-height:1.55;color:var(--muted);margin-top:16px}
-  .case-body h5{font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-top:32px}
+  .case-body{padding:34px 36px 24px;overflow-y:auto;display:flex;flex-direction:column}
+  .case-body h3{font-size:clamp(24px,2.3vw,32px);line-height:1.05;letter-spacing:-.035em;margin-top:14px}
+  .case-body .lead{font-size:16px;line-height:1.55;color:var(--muted);margin-top:16px}
+  .case-body h5{font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-top:24px}
   .case-body ul{list-style:none;margin-top:14px;display:grid;gap:12px}
-  .case-body li{position:relative;padding-left:22px;font-size:16px;line-height:1.5;color:var(--ink-2)}
+  .case-body li{position:relative;padding-left:22px;font-size:15px;line-height:1.5;color:var(--ink-2)}
   .case-body li::before{content:"";position:absolute;left:2px;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--accent)}
   .case-body .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-  .case-nav{margin-top:auto;padding-top:32px;display:flex;justify-content:space-between;gap:10px}
+  .case-nav{margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;gap:10px}
   .case-nav .btn{padding:12px 20px;font-size:15px}
   .case-close{position:absolute;top:18px;right:18px;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(0,0,0,.06);font-size:20px;cursor:pointer;color:var(--ink);transition:transform .08s}
   .case-close:active{transform:scale(.94)}
   .case-content{opacity:0}
+  .case-body .chips span{font-size:13px;padding:7px 11px;border-radius:9px;background:var(--bg);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
 
   /* cursor */
   .cursor{display:none}
@@ -316,8 +317,10 @@
     .j-card{padding:22px 20px}
     section.block{padding:96px var(--gutter)}
     .case{padding:0;align-items:flex-end}
-    .case-panel{grid-template-columns:1fr;grid-template-rows:220px 1fr;height:92vh;height:92svh;border-radius:28px 28px 0 0}
-    .case-body{padding:28px 22px 28px}
+    .case-panel{display:block;height:auto;max-height:92vh;max-height:92svh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border-radius:28px 28px 0 0}
+    .case-media{height:220px}
+    .case-body{overflow:visible;padding:28px 22px calc(28px + env(safe-area-inset-bottom))}
+    .case-close{position:sticky;top:14px;float:right;margin:14px 14px -58px 0}
     footer{padding-bottom:110px}
   }
   @media (prefers-reduced-motion:reduce){
@@ -533,7 +536,7 @@
   </div>
 </section>
 
-<div class="case" id="case" role="dialog" aria-modal="true" aria-labelledby="caseTitle" aria-hidden="true">
+<div class="case" id="case" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="caseTitle" aria-hidden="true">
   <div class="case-backdrop" data-close></div>
   <div class="case-panel" id="casePanel">
     <button class="case-close" type="button" data-close aria-label="Close">✕</button>
